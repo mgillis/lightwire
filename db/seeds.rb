@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+TransactionStatus.create(name: 'open')
+TransactionStatus.create(name: 'complete')
+TransactionStatus.create(name: 'cancelled')
+
+Action.create(name: 'buy')
+Action.create(name: 'sell')

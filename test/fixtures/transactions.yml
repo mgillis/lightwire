@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  portfolio: 
+  currency: MyString
+  cost: 9.99
+  count: 1
+  fee: 9.99
+  target: MyString
+  action: 
+
+two:
+  portfolio: 
+  currency: MyString
+  cost: 9.99
+  count: 1
+  fee: 9.99
+  target: MyString
+  action: 

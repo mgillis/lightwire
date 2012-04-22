@@ -2,6 +2,26 @@ Lightwire::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
+  resources :accounts, :only => :show do
+    resources :portfolios, :only => [:index, :show] do
+      member do
+        post 'stocktrade'
+        post 'currencytrade'
+        get 'history'
+      end
+
+      resources :transactions, :only => [:index, :show]
+    end
+    
+  end
+
+  resources :transactions, :only => [] do
+    member do
+      post 'confirm'
+      post 'cancel'
+    end
+  end
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
