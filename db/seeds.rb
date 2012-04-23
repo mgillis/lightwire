@@ -12,3 +12,5 @@ TransactionStatus.create(name: 'cancelled')
 
 Action.create(name: 'buy')
 Action.create(name: 'sell')
+
+Account.create(name: 'test1', api_key: 'abcdef')
