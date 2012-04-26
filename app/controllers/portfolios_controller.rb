@@ -45,7 +45,7 @@ class PortfoliosController < ApplicationController
 			respond_with nil, :status => 404
 		else
 			@portfolio = Portfolio.includes(:currency_assets, :stock_assets).find_by_id(params[:id])
-			if @portfolio.account != @account
+			if @portfolio.nil? or @portfolio.account != @account
 				respond_with nil, :status => 404
 			else
 				verify_key @portfolio.account or return false
@@ -62,7 +62,7 @@ class PortfoliosController < ApplicationController
 			respond_with nil, :status => 404
 		else
 			@portfolio = Portfolio.find_by_id(params[:id])
-			if @portfolio.account != @account
+			if @portfolio.nil? or @portfolio.account != @account
 				respond_with nil, :status => 404
 			else
 				verify_key @portfolio.account or return false
@@ -79,7 +79,7 @@ class PortfoliosController < ApplicationController
 			respond_with nil, :status => 404
 		else
 			@portfolio = Portfolio.find_by_id(params[:id])
-			if @portfolio.account != @account
+			if @portfolio.nil? or @portfolio.account != @account
 				respond_with nil, :status => 404
 			else
 				verify_key @portfolio.account or return false
@@ -96,7 +96,7 @@ class PortfoliosController < ApplicationController
 			respond_with nil, :status => 404
 		else
 			@portfolio = Portfolio.find_by_id(params[:id])
-			if @portfolio.account != @account
+			if @portfolio.nil? or @portfolio.account != @account
 				respond_with nil, :status => 404
 			else
 				verify_key @portfolio.account or return false
@@ -116,7 +116,7 @@ class PortfoliosController < ApplicationController
 			respond_with nil, :status => 400
 		else
 			@portfolio = Portfolio.find_by_id(params[:id])
-			if @portfolio.account != @account
+			if @portfolio.nil? or @portfolio.account != @account
 				respond_with nil, :status => 400
 			else
 				verify_key @portfolio.account or return false
@@ -149,7 +149,7 @@ class PortfoliosController < ApplicationController
 			respond_with nil, :status => 400
 		else
 			@portfolio = Portfolio.find_by_id(params[:id])
-			if @portfolio.account != @account
+			if @portfolio.nil? or @portfolio.account != @account
 				respond_with nil, :status => 400
 			else
 				verify_key @portfolio.account or return false
