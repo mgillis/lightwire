@@ -25,21 +25,19 @@ ActiveRecord::Schema.define(:version => 20120422222333) do
   end
 
   create_table "currency_assets", :force => true do |t|
-    t.integer "portfolio_id",              :null => false
-    t.decimal "amount",                    :null => false
-    t.string  "iso",          :limit => 3, :null => false
+    t.integer "portfolio_id",                                             :null => false
+    t.decimal "amount",                    :precision => 15, :scale => 3, :null => false
+    t.string  "iso",          :limit => 3,                                :null => false
   end
 
   add_index "currency_assets", ["portfolio_id", "iso"], :name => "index_currency_assets_on_portfolio_id_and_iso"
 
   create_table "portfolios", :force => true do |t|
-    t.integer  "account_id",                      :null => false
-    t.string   "name",                            :null => false
-    t.string   "base_currency",      :limit => 3, :null => false
-    t.decimal  "margin_requirement"
-    t.decimal  "base_cash"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.integer  "account_id",                 :null => false
+    t.string   "name",                       :null => false
+    t.string   "base_currency", :limit => 3, :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   add_index "portfolios", ["account_id"], :name => "index_portfolios_on_account_id"
@@ -49,7 +47,6 @@ ActiveRecord::Schema.define(:version => 20120422222333) do
     t.string  "currency",     :limit => 3, :null => false
     t.string  "symbol",                    :null => false
     t.integer "amount",                    :null => false
-    t.decimal "margin_rate"
   end
 
   add_index "stock_assets", ["portfolio_id", "symbol"], :name => "index_stock_assets_on_portfolio_id_and_symbol"
@@ -59,16 +56,16 @@ ActiveRecord::Schema.define(:version => 20120422222333) do
   end
 
   create_table "transactions", :force => true do |t|
-    t.integer  "portfolio_id",          :null => false
-    t.string   "currency",              :null => false
-    t.decimal  "cost",                  :null => false
-    t.integer  "count",                 :null => false
-    t.decimal  "fee",                   :null => false
-    t.string   "target",                :null => false
-    t.integer  "action_id",             :null => false
-    t.datetime "time_opened",           :null => false
+    t.integer  "portfolio_id",                                         :null => false
+    t.string   "currency",                                             :null => false
+    t.decimal  "cost",                  :precision => 15, :scale => 3, :null => false
+    t.integer  "count",                                                :null => false
+    t.decimal  "fee",                   :precision => 15, :scale => 3, :null => false
+    t.string   "target",                                               :null => false
+    t.integer  "action_id",                                            :null => false
+    t.datetime "time_opened",                                          :null => false
     t.datetime "time_closed"
-    t.integer  "transaction_status_id", :null => false
+    t.integer  "transaction_status_id",                                :null => false
   end
 
   add_index "transactions", ["action_id"], :name => "index_transactions_on_action_id"
