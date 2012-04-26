@@ -27,6 +27,10 @@ module Finance
    	end
 
     def self.currency_convert(from, to, amount)
+      if from == to
+        return amount
+      end
+
       info = self.query("#{from}#{to}=X")
 
       if info.nil?

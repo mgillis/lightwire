@@ -8,6 +8,7 @@ class Portfolio < ActiveRecord::Base
   attr_accessible :name
 
   MARGIN_RATE = 0.5
+  HISTORY_SIZE = 20
 
   def has_stock? (symbol, amount)
     s = stock_assets.where(:symbol => symbol).first
@@ -203,6 +204,8 @@ class Portfolio < ActiveRecord::Base
 
   	return "nothing found for symbol '#{symbol}" unless currency.present? and price.present?
 
+    return "unsupported currency #{currency} for trading #{symbol}" if !CURRENCY_OK?(currency)
+
   	txn = Transaction.new(
   		:cost => (price.to_f * amount.to_f).round(2),
   		:count => amount.to_i,
@@ -223,6 +226,9 @@ class Portfolio < ActiveRecord::Base
 
   	return "invalid currency '#{source}'" unless source.length == 3
   	return "invalid currency '#{target}'" unless target.length == 3
+
+    return "unsupported currency #{source}" if !CURRENCY_OK?(source)
+    return "unsupported currency #{target}" if !CURRENCY_OK?(target)
 
   	symbol = "#{target}#{source}=X"
 
@@ -253,4 +259,27 @@ class Portfolio < ActiveRecord::Base
   	txn
   end
 
+  def history
+    transactions.where('time_closed is not null').order('time_closed desc').limit(20)
+  end
+
+  def forex
+    currency_assets.map do |c|
+      {
+        :iso => c.iso,
+        :amount => c.amount,
+        :market_value  => c.market_value_in_currency(base_currency)
+      }
+    end
+  end
+
+  def securities
+    stock_assets.map do |s|
+      {
+        :symbol => s.symbol,
+        :amount => s.amount,
+        :market_value  => s.market_value_in_currency(base_currency)
+      }
+    end
+  end
 end

@@ -9,11 +9,11 @@ class CurrencyAsset < ActiveRecord::Base
 
     if !quotes.key?(symbol)
       # ???
-      return 0
+      return nil, nil
     end
 
     quote_currency, price = quotes[symbol]
 
-    return other_currency, price * amount
+    return other_currency, (price * amount).round(2)
   end
 end

@@ -7,8 +7,11 @@ class TransactionsController < ApplicationController
 
     if @txn.present?
       verify_key @txn.account or return false
-      @txn.execute
-      respond_with @txn
+      if @txn.execute
+        respond_with @txn
+      else
+        respond_with :nil, :status => 422
+      end
     else
       respond_with nil, :status => 400
     end
@@ -21,8 +24,11 @@ class TransactionsController < ApplicationController
 
     if @txn.present?
       verify_key @txn.account or return false
-      @txn.cancel
-      respond_with @txn
+      if @txn.cancel
+        respond_with @txn
+      else
+        respond_with :nil, :status => 422
+      end
     else
       respond_with nil, :status => 400
     end

@@ -8,6 +8,8 @@ Lightwire::Application.routes.draw do
         post 'stocktrade'
         post 'currencytrade'
         get 'history'
+        get 'forex'
+        get 'securities'
       end
 
       resources :transactions, :only => [:index, :show]
