@@ -84,7 +84,7 @@ class Transaction < ActiveRecord::Base
   		# currency
   		f = cost*0.00002
       if currency != "USD"
-  		  min = Finance::Yahoo.convert_currency("USD", currency, 2.50)
+  		  min = Finance::Yahoo.currency_convert("USD", currency, 2.50)
       else
         min = 2.50
       end

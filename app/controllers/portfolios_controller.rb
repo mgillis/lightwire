@@ -21,7 +21,7 @@ class PortfoliosController < ApplicationController
 		return unless has_params?(:name, :base_currency)
 
 		if !CURRENCY_OK?(params[:base_currency])
-			respond_with :text => "currency '#{params[:base_currency]}' not recognized - try one of #{LIGHTWIRE_CURRENCIES.join(', ')}", :status => 400
+			render :text => "currency '#{params[:base_currency]}' not recognized - try one of #{LIGHTWIRE_CURRENCIES.join(', ')}", :status => 400
 			return
 		end
 
@@ -33,7 +33,7 @@ class PortfoliosController < ApplicationController
 			verify_key @account or return false
 			@portfolio = Portfolio.create!(:account => @account, :name => params[:name], :base_currency => params[:base_currency])
 			@portfolio.credit_currency(params[:base_currency], Finance::Yahoo.currency_convert(STARTING_MONEY_CURRENCY, params[:base_currency], STARTING_MONEYS))
-			respond_with @portfolio
+			respond_with @account, @portfolio
 		end
 	end
 
@@ -125,7 +125,7 @@ class PortfoliosController < ApplicationController
 				if result.class == String
 					respond_with result, :status => 422
 				else
-					respond_with result, :status => 400
+					respond_with result, :status => 201
 				end
 			end
 		end
@@ -158,7 +158,7 @@ class PortfoliosController < ApplicationController
 				if result.class == String
 					respond_with result, :status => 422
 				else
-					respond_with result, :status => 400
+					respond_with result, :status => 201
 				end
 			end
 		end

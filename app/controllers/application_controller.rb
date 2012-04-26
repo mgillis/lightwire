@@ -1,13 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  respond_to :json, :html
+  respond_to :json
 
 	before_filter :default_format
 
 	# rails doesn't actually have a way to do this in a better way. cool
 	def default_format
-	  request.format = "json" unless params[:format]
+	  request.format = "json"
 	end
 
 	def verify_key (account)

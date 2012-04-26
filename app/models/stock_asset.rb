@@ -19,7 +19,7 @@ class StockAsset < ActiveRecord::Base
     mv_curr, mv_val = market_value
     return nil if mv_curr.nil?
 
-    return Finance::Yahoo.currency_convert(mv_curr, curr, mv_val).round(2)
+    return curr, Finance::Yahoo.currency_convert(mv_curr, curr, mv_val).round(2)
   end
 
 end

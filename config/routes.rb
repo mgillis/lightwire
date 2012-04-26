@@ -17,7 +17,7 @@ Lightwire::Application.routes.draw do
     
   end
 
-  resources :transactions, :only => [] do
+  resources :transactions, :only => [:show] do
     member do
       post 'execute'
       post 'cancel'

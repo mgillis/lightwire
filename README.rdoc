@@ -53,7 +53,7 @@ POST /accounts/<account id>/portfolio/<portfolio id>/stocktrade
   -> JSON transaction object, see below. or 422 if this would be impossible, plus a string describing why.
   the transaction at this point is OPEN, not actually executed, and is valid for 30 seconds after the quote.
 
-POST /accounts/<account id>/portfolio/<portfolio id>/stocktrade
+POST /accounts/<account id>/portfolio/<portfolio id>/currencytrade
  params: source (currency), target (currency), amount, tradetype ('buy' or 'sell'. source is buying or selling target.)
   -> JSON transaction object, see below. or 422 if this would be impossible, plus a string describing why.
   the transaction at this point is OPEN, not actually executed, and is valid for 30 seconds after the quote.

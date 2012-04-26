@@ -5,7 +5,7 @@ class Portfolio < ActiveRecord::Base
   has_many :stock_assets
   has_many :currency_assets
   has_many :transactions
-  attr_accessible :name
+  attr_accessible :name, :account, :base_currency
 
   MARGIN_RATE = 0.5
   HISTORY_SIZE = 20
