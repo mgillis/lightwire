@@ -5,8 +5,8 @@ Lightwire::Application.routes.draw do
   resources :accounts, :only => :show do
     resources :portfolios, :only => [:index, :show] do
       member do
-        post 'stocktrade'
-        post 'currencytrade'
+        get 'stocktrade' # post
+        get 'currencytrade' # post
         get 'history'
       end
 
@@ -17,7 +17,7 @@ Lightwire::Application.routes.draw do
 
   resources :transactions, :only => [] do
     member do
-      post 'confirm'
+      get 'execute' #post
       post 'cancel'
     end
   end

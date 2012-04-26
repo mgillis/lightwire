@@ -3,9 +3,9 @@ class CreateTransactions < ActiveRecord::Migration
     create_table :transactions do |t|
       t.references :portfolio, :null => false
       t.string :currency, :null => false
-      t.decimal :cost, :null => false
+      t.decimal :cost, :null => false, :precision => 15, :scale => 3
       t.integer :count, :null => false
-      t.decimal :fee, :null => false
+      t.decimal :fee, :null => false, :precision => 15, :scale => 3
       t.string :target, :null => false
       t.references :action, :null => false
       t.datetime :time_opened, :null => false

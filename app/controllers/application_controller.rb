@@ -19,4 +19,14 @@ class ApplicationController < ActionController::Base
 		end
 	end
 
+	def has_params? (*list)
+		list.each do |k|
+			if !params.key?(k)
+				render :text => "missing required parameter '#{k}' in request", :status => 400
+				return false
+			end
+		end
+		return true
+	end
+
 end

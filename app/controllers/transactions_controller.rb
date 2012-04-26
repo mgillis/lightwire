@@ -1,13 +1,13 @@
 class TransactionsController < ApplicationController
 
-  # POST /transactions/:id/confirm(.:format)
-  def confirm
+  # POST /transactions/:id/execute(.:format)
+  def execute
 
     @txn = Transaction.find_by_id(params[:id])
 
     if @txn.present?
       verify_key @txn.account or return false
-      @txn.confirm
+      @txn.execute
       respond_with @txn
     else
       respond_with nil, :status => 400
