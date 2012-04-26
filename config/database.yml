@@ -22,7 +22,10 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
+  adapter: postgresql
+  host: 77.92.68.105
+  port: 10301
+  username: c990df362vcpppyb
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
