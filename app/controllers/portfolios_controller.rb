@@ -13,6 +13,21 @@ class PortfoliosController < ApplicationController
 		end
 	end
 
+	# POST /accounts/1234/portfolios
+	def create
+		return unless has_params?(:name, :base_currency)
+
+		@account = Account.find_by_id(params[:account_id])
+
+		if @account.nil?
+			respond_with nil, :status => 404
+		else
+			verify_key @account or return false
+			@portfolio = Portfolio.create!(:account => @account, :name => params[:name], :base_currency => params[:base_currency])
+			respond_with @portfolio
+		end
+	end
+
 	# GET /accounts/1234/portfolios/4567
 	def show
 		@account = Account.find_by_id(params[:account_id])
