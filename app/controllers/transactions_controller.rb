@@ -7,13 +7,18 @@ class TransactionsController < ApplicationController
 
     if @txn.present?
       verify_key @txn.account or return false
-      if @txn.execute
-        respond_with @txn
-      else
-        respond_with :nil, :status => 422
+
+      begin
+        if @txn.execute
+         respond_with @txn
+        else
+         render :nothing => true, :status => 422
+        end
+      rescue Transaction::ExpiredException
+        respond_with :text => "Transaction expired.", :status => 422
       end
     else
-      respond_with nil, :status => 400
+      render :nothing => true, :status => 400
     end
 
   end
@@ -27,10 +32,10 @@ class TransactionsController < ApplicationController
       if @txn.cancel
         respond_with @txn
       else
-        respond_with :nil, :status => 422
+        render :nothing => true, :status => 422
       end
     else
-      respond_with nil, :status => 400
+      render :nothing => true, :status => 400
     end
   end
 
@@ -60,7 +65,7 @@ class TransactionsController < ApplicationController
 
       respond_with @txn
     else
-      respond_with nil, :status => 404
+      render :nothing => true, :status => 404
     end
   end
 
