@@ -176,6 +176,8 @@ class Portfolio < ActiveRecord::Base
     end
 
     stocks = Hash[stock_assets.map{ |sa| [sa.symbol, sa] }]
+
+    puts "#{stocks.inspect}"
     if stocks.any?
       quotes = Finance::Yahoo.last_quotes(*stocks.keys)
       quotes.each do |sym, q|
