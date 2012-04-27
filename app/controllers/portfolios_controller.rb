@@ -20,6 +20,8 @@ class PortfoliosController < ApplicationController
 	def create
 		return unless has_params?(:name, :base_currency)
 
+		params[:base_currency].upcase!
+
 		if !CURRENCY_OK?(params[:base_currency])
 			render :text => "currency '#{params[:base_currency]}' not recognized - try one of #{LIGHTWIRE_CURRENCIES.join(', ')}", :status => 400
 			return
@@ -110,6 +112,10 @@ class PortfoliosController < ApplicationController
 	def stocktrade
 		return unless has_params?(:symbol, :amount, :tradetype)
 
+		params[:symbol].upcase!
+		params[:amount].upcase!
+		params[:tradetype].downcase!
+
 		@account = Account.find_by_id(params[:account_id])
 
 		if @account.nil?
@@ -135,6 +141,10 @@ class PortfoliosController < ApplicationController
 	# params needed: source, target, amount, tradetype
 	def currencytrade
 		return unless has_params?(:source, :target, :amount, :tradetype)
+
+		params[:source].upcase!
+		params[:target].upcase!
+		params[:tradetype].downcase!
 
 		[params[:source], params[:target]].each do |curr|
 			if !CURRENCY_OK?(curr)
