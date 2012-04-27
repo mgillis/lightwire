@@ -12,10 +12,10 @@ class TransactionsController < ApplicationController
         if @txn.execute
          respond_with @txn
         else
-         render :nothing => true, :status => 422
+         render :text => "Couldn't execute trade. Maybe you don't have enough funds/margin?", :status => 422
         end
       rescue Transaction::ExpiredException
-        respond_with :text => "Transaction expired.", :status => 422
+        render :text => "Transaction expired.", :status => 422
       end
     else
       render :nothing => true, :status => 400
