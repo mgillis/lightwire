@@ -1,8 +1,10 @@
 = lightwire
 
+A little app to track stock portfolios in multiple currencies using REST and JSON.
+
 == API
 
-All requests must have 'key=<your api key>' in params. I am not going to type it over and over, just do it ok, tia.
+NOTE: All requests must have 'key=<your api key>' in params, as well as any specified params below.
 
 All currencies are ISO 4217 compliant 3-letter codes. As of this writing the only supported currencies are: USD, CAD, EUR, GBP, HKD, AUD, JPY, SGD. This should be enough for most crazy shit.
 
