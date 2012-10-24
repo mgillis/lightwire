@@ -8,10 +8,10 @@ All currencies are ISO 4217 compliant 3-letter codes. As of this writing the onl
 
 All responses are one of:
  200 (OK) and a json body, as described below
- 400 (Client Error): you fucked up
+ 400 (Client Error): the received request was invalid somehow
  404 (Not Found): something you're trying to act upon or view doesn't exist
  422 (Entity Unprocessable): what you are trying to do can't be done, like executing a cancelled transaction, etc.
- 5xx (server error): I fucked up
+ 5xx (server error): the usual, a problem within the app.
 
 === accounts
 
