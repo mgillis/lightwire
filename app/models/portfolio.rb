@@ -110,7 +110,7 @@ class Portfolio < ActiveRecord::Base
     if a.present?
       a.amount += amount
       if a.amount == 0
-        a.delete!
+        a.destroy
       else
         a.save!
       end
@@ -136,7 +136,7 @@ class Portfolio < ActiveRecord::Base
     if a.present?
       a.amount += amount
       if a.amount == 0
-        a.delete!
+        a.destroy
       else
         a.save!
       end
